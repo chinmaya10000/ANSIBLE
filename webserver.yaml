@@ -15,7 +15,7 @@
     when: ansible_os_family == "RedHat"
 
   - name: Install latest version of Apache in debian
-    ansible.builtin.apt:
+    apt:
       name: apache2   
       state: latest
     when: ansible_os_family == "Debian"

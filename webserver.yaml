@@ -3,11 +3,24 @@
   hosts: all 
   become: yes
   tasks: 
-  - name: Install latest version of Apache 
+  - name: Install latest version of Apache in redHat
     ansible.builtin.yum:
       name: httpd   
       state: latest
+    when: ansible_os_family == "RedHat"
   - name: Start Apache server
     ansible.builtin.service:
       name: httpd
       state: started
+    when: ansible_os_family == "RedHat"
+
+  - name: Install latest version of Apache in debian
+    ansible.builtin.apt:
+      name: apache2   
+      state: latest
+    when: ansible_os_family == "Debian"
+  - name: Start Apache server
+    ansible.builtin.service:
+      name: apache2
+      state: started
+    when: ansible_os_family == "Debian"

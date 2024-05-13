@@ -14,10 +14,10 @@
       state: started
     when: ansible_os_family == "RedHat"
 
-  - name: Install latest version of Apache in debian
+  - name: Install Apache in debian
     apt:
       name: apache2   
-      state: latest
+      state: present
     when: ansible_os_family == "Debian"
   - name: Start Apache server
     ansible.builtin.service:

@@ -2,3 +2,5 @@
 ansible_ssh_private_key_file: /home/ubuntu/ansible01feb_key.pem
 installonubuntu: apache2
 install0nredhat: httpd
+javaonredhat: java-11-amazon-corretto
+javaondebian: openjdk-11-jdk

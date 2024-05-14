@@ -1,3 +1,3 @@
 [servers]
 13.58.184.31 ansible_user=ec2-user
-3.19.188.156 ansible_user=ubuntu
+18.222.92.184 ansible_user=ubuntu

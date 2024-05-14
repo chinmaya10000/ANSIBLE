@@ -1,28 +1,19 @@
 --- 
-- hosts: 3.145.148.37
+- hosts: 3.19.188.156
   become: yes
   tasks:
   - name: Install git
     ansible.builtin.apt:
       name: git
       state: present
-    tags: mygit
+    
   - name: Install tree
     ansible.builtin.apt:
       name: tree
       state: present
-    tags: mytree
+    
   - name: Install wget
     ansible.builtin.apt:
       name: wget
       state: present
-    tags: mywget
-
-
-# Only install tree.
-# ansible-playbook tags.yaml --tag="mytree" 
-
-# Tree package will be skip, git and wget will be installed.
-# ansible-playbook tags.yaml --skip-tag="mytree"
- 
-  
+    

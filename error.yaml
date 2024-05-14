@@ -10,7 +10,8 @@
   - name: Install tree
     ansible.builtin.apt:
       name: tree
-      state: present
+      statee: present
+    ignore_errors: True
     
   - name: Install wget
     ansible.builtin.apt:

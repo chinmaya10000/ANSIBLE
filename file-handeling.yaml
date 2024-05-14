@@ -2,7 +2,8 @@
 - hosts: 3.19.188.156
   become: yes
   tasks:
-  - include: myfile.yaml   # we write the different playbooks combining one or multiple tasks and then add them to the main playbook.
+  - ansible.builtin.include_tasks:
+      file: myfile.yaml
   - name: install apache2
     ansible.builtin.apt:
       name: apache2

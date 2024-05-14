@@ -4,7 +4,16 @@
   tasks:
   - ansible.builtin.include_tasks:
       file: myfile.yaml
+  
   - name: install apache2
     ansible.builtin.apt:
       name: apache2
       state: present
+  - name: copy index.html
+    ansible.builtin.copy:
+      src: /home/ubuntu/ansible/index.html
+      dest: /var/www/html
+  - name: copy index.html
+    ansible.builtin.copy:
+      src: /home/ubuntu/ansible/coffee.jpg
+      dest: /var/www/html

@@ -1,0 +1,5 @@
+--- 
+- name: Create a testfile
+  ansible.builtin.file:
+    path: /home/ubuntu/testfile
+    state: touch

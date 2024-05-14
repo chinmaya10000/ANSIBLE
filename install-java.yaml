@@ -7,9 +7,9 @@
       ansible.builtin.yum:
         name: "{{javaonredhat}}"
         state: present
-      when: ansible_distribution == "RedHat"
+      when: ansible_os_family == "RedHat"
     - name: Install Java 11 on Debian
       ansible.builtin.apt:
         name: "{{javaondebian}}"
         state: present
-      when: ansible_distribution == "Debian"
+      when: ansible_os_family == "Debian"

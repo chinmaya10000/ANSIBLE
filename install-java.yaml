@@ -11,6 +11,7 @@
 
     - name: Update apt repo and cache 
       ansible.builtin.apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+      when: ansible_os_family == "Debian"
     - name: Install Java 11 on Debian
       ansible.builtin.apt:
         name: "{{javaondebian}}"

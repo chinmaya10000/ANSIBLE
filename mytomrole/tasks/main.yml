@@ -7,3 +7,4 @@
 - ansible.builtin.include_tasks: tomcat-dashboard.yaml
 - ansible.builtin.include_tasks: tomcat-service.yaml
 - ansible.builtin.include_tasks: tomcat-start.yaml
+- ansible.builtin.include_tasks: deploy-javaapp.yaml

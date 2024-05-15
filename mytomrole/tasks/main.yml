@@ -1,2 +1,9 @@
 ---
 # tasks file for mytomrole
+- ansible.builtin.include_tasks: tomcat-user.yaml
+- ansible.builtin.include_tasks: installjava.yaml
+- ansible.builtin.include_tasks: download-tomcat.yaml
+- ansible.builtin.include_tasks: permission.yaml
+- ansible.builtin.include_tasks: tomcat-dashboard.yaml
+- ansible.builtin.include_tasks: tomcat-service.yaml
+- ansible.builtin.include_tasks: tomcat-start.yaml

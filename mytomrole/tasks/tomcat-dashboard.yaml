@@ -1,0 +1,15 @@
+--- 
+- name: Copy tom user file into node side 
+  ansible.builtin.template:
+    src: templates/tomcat-users.j2
+    dest: /opt/tomcat/conf/tomcat-users.xml
+    
+- name: Copy context file into node side 
+  ansible.builtin.template:
+    src: templates/context.j2
+    dest: /opt/tomcat/webapps/manager/META-INF/context.xml
+
+- name: Copy host context file into node side 
+  ansible.builtin.template:
+    src: templates/host-context.j2
+    dest: /opt/tomcat/webapps/host-manager/META-INF/context.xml

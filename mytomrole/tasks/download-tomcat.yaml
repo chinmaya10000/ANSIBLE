@@ -1,0 +1,16 @@
+--- 
+- name: Download  tomcat 
+  ansible.builtin.get_url:
+    url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.24/bin/apache-tomcat-10.1.24.tar.gz
+    dest: /home/ubuntu/apache-tomcat-10.1.24.tar.gz
+
+- name: Create tomcat directory
+  ansible.builtin.file:
+    path: /opt/tomcat
+    state: directory
+
+- name: Extract tomcat archive
+  ansible.builtin.command:
+    cmd: sudo tar xzvf apache-tomcat-10*tar.gz -C /opt/tomcat --strip-components=1
+    creates: /opt/tomcat/LICENSE
+    

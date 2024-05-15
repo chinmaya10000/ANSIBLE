@@ -15,7 +15,7 @@
       dest: /var/www/html
     notify:
       - Restart apache
-  - name: copy index.html
+  - name: copy coffee.jpg
     ansible.builtin.copy:
       src: /home/ubuntu/ansible/coffee.jpg
       dest: /var/www/html

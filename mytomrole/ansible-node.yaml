@@ -1,0 +1,18 @@
+---
+- name: create ansible node
+  hosts: localhost
+  become: yes
+  tasks: 
+  - name: create ansible node
+    amazon.aws.ec2_instance:
+      name: "ansible-node"
+      key_name: "ansible01feb_key"
+      vpc_subnet_id: 
+      instance_type: t2.micro
+      security_group: ansible-sg
+      count: 2
+      network:
+        assign_public_ip: true
+      image_id: ami-09040d770ffe2224f
+      tags:
+        Environment: Ansible_Node

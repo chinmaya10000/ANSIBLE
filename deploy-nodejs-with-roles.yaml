@@ -1,9 +1,6 @@
 --- 
 - hosts: 3.145.164.83
   become: true
-  vars_files:
-  - project-vars
   roles:
-  - nodejs
-  - deploy-nodejs-app
+  
   

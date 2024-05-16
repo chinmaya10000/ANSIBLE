@@ -19,5 +19,14 @@
     ansible.builtin.unarchive:
       src: /home/ubuntu/ansible/simple-nodejs/nodejs-app-1.0.0.tgz
       dest: /home/ubuntu/
+  - name: Install dependencies
+    community.general.npm:
+      path: /home/ubuntu/package
+  - name: Start the application
+    ansible.builtin.command:
+      chdir: /home/ubuntu/package/app
+      cmd: node server
+    async: 1000
+    poll: 0
 
 

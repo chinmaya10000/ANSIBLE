@@ -46,14 +46,6 @@
   hosts: nexus_server
   become: yes
   tasks:
-  - name: Ensure group "nexus" exists
-    ansible.builtin.group:
-      name: nexus
-      state: present
-  - name: Create nexus user
-    ansible.builtin.user:
-      name: nexus
-      group: nexus
   - name: Make nexus user owner of nexus folder
     ansible.builtin.file:
       path: /opt/nexus 
@@ -82,5 +74,17 @@
   - name: Start nexus
     ansible.builtin.command: /opt/nexus/bin/nexus start
     
-
-    
+- name: verify nexus is running 
+  hosts: nexus_server
+  tasks:
+  - name: Check with ps 
+    ansible.builtin.shell: ps aux | grep node
+    register: app_status
+  - ansible.builtin.debug: msg={{ app_status.stdout_lines }}
+  - name: Wait one minute
+    ansible.builtin.pause:
+      minutes: 1
+  - name: Check with netstat
+    ansible.builtin.shell: netstat -plnt
+    register: app_status
+  ansible.builtin.debug: msg={{ app_status.stdout_lines }}

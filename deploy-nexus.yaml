@@ -19,7 +19,7 @@
       url: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
       dest: /opt/ 
     register: download_result
-  - ansible.builtin.debug: msg={{ download_result }}
+  #- ansible.builtin.debug: msg={{ download_result }}
   - name: Untar nexus installer 
     ansible.builtin.unarchive:
       src: "{{ download_result.dest }}"
@@ -31,5 +31,11 @@
       pattern: "nexus-*"
       file_type: directory
     register: find_result
-  - ansible.builtin.debug: msg={{ find_result }}  
-    
+  #- ansible.builtin.debug: msg={{ find_result }}
+  - name: Check if nexus folder already exists  
+    ansible.builtin.stat:
+      path: /opt/nexus
+    register: stat_result
+  - ansible.builtin.debug: msg={{ stat_result }}
+  - name: Rename nexus directory
+    ansible.builtin.shell: mv {{ find_result.files[0].path }} /opt/nexus

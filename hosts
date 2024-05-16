@@ -1,1 +1,1 @@
-18.219.239.146 ansible_ssh_private_key_file=/home/ubuntu/ansible01feb_key.pem ansible_user=ubuntu
+3.149.235.171 ansible_ssh_private_key_file=/home/ubuntu/ansible01feb_key.pem ansible_user=ubuntu

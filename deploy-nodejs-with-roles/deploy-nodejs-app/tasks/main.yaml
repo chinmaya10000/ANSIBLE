@@ -1,7 +1,7 @@
 - name: Unpack the nodejs file
   ansible.builtin.unarchive:
-      src: "{{location}}/nodejs-app-{{version}}.tgz"
-      dest: "{{user_home_dir}}"
+    src: "{{location}}/nodejs-app-{{version}}.tgz"
+    dest: "{{user_home_dir}}"
 - name: Install dependencies
   community.general.npm:
     path: "{{user_home_dir}}/package"

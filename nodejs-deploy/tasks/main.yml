@@ -1,4 +1,0 @@
----
-# tasks file for nodejs-deploy
-- ansible.builtin.include_tasks: install-nodejs.yaml
-- ansible.builtin.include_tasks: deploy-nodejs-app.yaml

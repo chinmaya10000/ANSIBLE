@@ -32,10 +32,11 @@
       file_type: directory
     register: find_result
   #- ansible.builtin.debug: msg={{ find_result }}
-  - name: Check if nexus folder already exists  
+  - name: Check nexus folder stats
     ansible.builtin.stat:
       path: /opt/nexus
     register: stat_result
-  - ansible.builtin.debug: msg={{ stat_result }}
+  #- ansible.builtin.debug: msg={{ stat_result.stat.exists }}
   - name: Rename nexus directory
     ansible.builtin.shell: mv {{ find_result.files[0].path }} /opt/nexus
+    when: not stat_result.stat.exists

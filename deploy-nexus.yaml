@@ -54,7 +54,6 @@
     ansible.builtin.user:
       name: nexus
       group: nexus
-      home: /opt/nexus
   - name: Make nexus user owner of nexus folder
     ansible.builtin.file:
       path: /opt/nexus
@@ -70,3 +69,14 @@
       owner: nexus
       group: nexus
     
+- name: Start nexus service
+  hosts: nexus_server
+  become: yes
+  tasks:
+  - name: Set run_as_user nexus 
+    ansible.builtin.lineinfile:
+      path: /opt/nexus/bin/nexus.rc
+      regexp: '^#run_as_user=""'
+      line: run_as_user="nexus"
+  - name: Start nexus
+    ansible.builtin.command: /opt/nexus/bin/nexus start

@@ -2,5 +2,6 @@
 - hosts: 3.145.164.83
   become: true
   roles:
+  - {role: deploy-nodejs, when: ansible_os_family=="Debian"}
   
   

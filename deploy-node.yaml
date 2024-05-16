@@ -1,6 +1,6 @@
 --- 
 - name: Install node and npm
-  hosts: 18.191.144.58
+  hosts: 18.219.239.146
   become: true
   tasks:
   - name: Update apt repo and cache 
@@ -12,7 +12,7 @@
       - npm
 
 - name: Deploy Nodejs app
-  hosts: 18.191.144.58
+  hosts: 18.219.239.146
   become: true
   vars_files:
   - project-vars

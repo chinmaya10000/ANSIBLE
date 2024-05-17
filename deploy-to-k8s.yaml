@@ -12,7 +12,7 @@
     - name: Deploy solar-system app 
       kubernetes.core.k8s:
         state: present
-        src: /home/ec2-user/ansible/gitops-argocd/solar-system
+        src: /home/ec2-user/ansible/gitops-argocd/solar-system/solar-config.yaml
         kubeconfig: /root/.kube/config
         namespace: my-app
 

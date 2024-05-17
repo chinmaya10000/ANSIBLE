@@ -8,3 +8,9 @@
 
 # ansible [core 2.16.6]
 # python version = 3.12.3
+
+
+# python3 -c "import openshift"
+# pip3 install openshift --user
+# python3 -c "import yaml"
+# pip3 install PyYAML --user

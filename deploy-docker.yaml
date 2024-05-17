@@ -56,3 +56,6 @@
       registry_url: https://index.docker.io/v1/
       username: chinmayapradhan
       password: "{{ docker_password }}"
+  - name: Start Container from Compose
+    community.docker.docker_compose:
+      project_src: /home/ec2-user 

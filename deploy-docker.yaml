@@ -17,3 +17,7 @@
     ansible.builtin.command: docker-compose version
     register: docker_compose_version
   - ansible.builtin.debug: msg="{{ docker_compose_version.stdout_lines }}"
+  - name: Start Docker Daemon
+    ansible.builtin.systemd:
+      state: started
+      name: docker

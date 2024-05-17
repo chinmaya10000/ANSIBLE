@@ -31,9 +31,14 @@
     ansible.builtin.user:
       name: ec2-user
       groups: docker 
-      append: yes 
-  - name: Reconnect to server session
-    ansible.builtin.meta: reset_connection
+      append: yes
+  - name: Restart SSHD service
+    ansible.builtin.service:
+      name: sshd
+      state: restarted
+ 
+  #- name: Reconnect to server session
+    #ansible.builtin.meta: reset_connection
 
 - name: Test docker pull 
   hosts: docker_server

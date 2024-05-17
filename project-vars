@@ -3,4 +3,4 @@ location: /home/ubuntu/ansible/simple-nodejs
 linux_user: ubuntu
 user_home_dir: /home/{{linux_user}}
 
-docker_password: chinu@2242
+docker_password: XXXXXXXX # Password of your registry

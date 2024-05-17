@@ -32,3 +32,9 @@
       name: ec2-user
       group: docker 
       append: yes 
+
+- name: Test docker pull 
+  hosts: docker_server
+  tasks:
+  - name: Pull redis 
+    ansible.builtin.command: docker pull redis

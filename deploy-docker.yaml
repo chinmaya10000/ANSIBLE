@@ -8,3 +8,12 @@
       name: docker 
       update_cache: yes
       state: present
+  - name: Install Docker-Compose
+    ansible.builtin.get_url:
+      url: https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: +x
+  - name: Check docker-compose
+    ansible.builtin.command: docker-compose version
+    register: docker_compose_version
+  - ansible.builtin.debug: msg="{{docker_compose_version}}"

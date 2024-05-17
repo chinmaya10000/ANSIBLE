@@ -1,5 +1,0 @@
---- 
-- name: Deploy java app 
-  ansible.builtin.get_url:
-    url: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    dest: /opt/tomcat/webapps/ROOT.war

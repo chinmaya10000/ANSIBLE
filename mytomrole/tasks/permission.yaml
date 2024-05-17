@@ -1,6 +1,13 @@
---- 
-- name: grant tomcat ownership over the extracted folder
-  ansible.builtin.command: sudo chown -R tomcat:tomcat /opt/tomcat/
-
-- name: execute permission on bin folder
-  ansible.builtin.command: sudo chmod -R u+x /opt/tomcat/bin
+---
+- name: Ensure correct ownership of Tomcat directory
+  ansible.builtin.file:
+    path: /opt/tomcat
+    state: directory
+    recurse: yes
+    owner: tomcat
+    group: tomcat
+- name: Ensure execute permissions on Tomcat bin directory
+  ansible.builtin.file:
+    path: /opt/tomcat/bin
+    mode: "u+x"
+    recurse: yes

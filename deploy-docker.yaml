@@ -39,4 +39,7 @@
   hosts: docker_server
   tasks:
   - name: Pull Redis 
-    ansible.builtin.command: docker pull redis
+    community.docker.docker_image:
+      name: redis 
+      source: pull
+

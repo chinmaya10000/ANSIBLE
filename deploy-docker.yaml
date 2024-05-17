@@ -35,11 +35,24 @@
   - name: Reconnect to server session
     ansible.builtin.meta: reset_connection
 
-- name: Test docker pull 
-  hosts: docker_server
-  tasks:
-  - name: Pull Redis 
-    community.docker.docker_image:
-      name: redis 
-      source: pull
+#- name: Test docker pull 
+  #hosts: docker_server
+  #tasks:
+  #- name: Pull Redis 
+    #community.docker.docker_image:
+      #name: redis 
+      #source: pull
 
+- name: Start Docker Container 
+  hosts: docker_server
+  vars_files:
+  - project-vars
+  tasks:
+  - ansible.builtin.copy:
+      src: /home/ec2-user/ansible/Notes-app/docker-compose.yml
+      dest: /home/ec2-user/docker-compose.yml
+  - name: Docker login 
+    community.docker.docker_login:
+      registry_url: https://index.docker.io/v1/
+      username: chinmayapradhan
+      password: "{{ docker_password }}"

@@ -15,6 +15,3 @@
         src: /home/ec2-user/ansible/gitops-argocd/solar-system/solar-config.yaml
         kubeconfig: /root/.kube/config
         namespace: my-app
-
-  
-

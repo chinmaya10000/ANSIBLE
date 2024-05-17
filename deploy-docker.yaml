@@ -1,0 +1,10 @@
+--- 
+- name: Install Docker and Docker-Compose
+  hosts: docker_server
+  become: yes
+  tasks:
+  - name: Install Docker
+    ansible.builtin.yum:
+      name: docker 
+      update_cache: yes
+      state: present

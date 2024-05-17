@@ -16,4 +16,4 @@
   - name: Check docker-compose
     ansible.builtin.command: docker-compose version
     register: docker_compose_version
-  - ansible.builtin.debug: msg="{{docker_compose_version}}"
+  - ansible.builtin.debug: msg="{{ docker_compose_version.stdout_lines }}"

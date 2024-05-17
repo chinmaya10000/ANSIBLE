@@ -9,6 +9,12 @@
         kind: Namespace
         state: present
         kubeconfig: /root/.kube/config
+    - name: Deploy solar-system app 
+      kubernetes.core.k8s:
+        state: present
+        src: /home/ec2-user/ansible/gitops-argocd/solar-system
+        kubeconfig: /root/.kube/config
+        namespace: my-app
 
   
 

@@ -32,6 +32,8 @@
       name: ec2-user
       groups: docker 
       append: yes 
+  - name: Reconnect to server session
+    ansible.builtin.meta: reset_connection
 
 - name: Test docker pull 
   hosts: docker_server

@@ -2,6 +2,7 @@
 - name: Install Docker and Docker-Compose
   hosts: docker_server
   become: yes
+  gather_facts: False
   tasks:
   - name: Install Docker
     ansible.builtin.yum:
@@ -21,3 +22,13 @@
     ansible.builtin.systemd:
       state: started
       name: docker
+
+- name: Add user to docker group 
+  hosts: docker_server 
+  become: yes
+  tasks:
+  - name: Add ec2-user to docker group 
+    ansible.builtin.user:
+      name: ec2-user
+      group: docker 
+      append: yes 

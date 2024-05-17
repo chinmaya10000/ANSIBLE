@@ -34,14 +34,3 @@
       append: yes
   - name: Reconnect to server session
     ansible.builtin.meta: reset_connection
-  - name: Verify ec2-user groups
-    ansible.builtin.command: groups ec2-user
-    register: user_groups
-  - ansible.builtin.debug: msg={{ user_groups.stdout }}
-
-- name: Test docker pull 
-  hosts: docker_server
-  tasks:
-    - name: Pull redis image
-      ansible.builtin.command:
-        cmd: docker pull redis

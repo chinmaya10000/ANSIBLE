@@ -57,5 +57,7 @@
       username: chinmayapradhan
       password: "{{ docker_password }}"
   - name: Start Container from Compose
-    community.docker.docker_compose:
-      project_src: /home/ec2-user 
+    ansible.builtin.shell:
+      cmd: "docker-compose -f docker-compose.yml up -d"
+      chdir: /home/ec2-user/
+ 

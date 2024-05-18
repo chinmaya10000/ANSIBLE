@@ -85,7 +85,7 @@
   hosts: nexus_server
   tasks:
   - name: Check with ps 
-    ansible.builtin.shell: ps aux | grep node
+    ansible.builtin.shell: ps aux | grep nexus
     register: app_status
   - ansible.builtin.debug: msg={{ app_status.stdout_lines }}
   - name: Wait one minute

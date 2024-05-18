@@ -1,0 +1,14 @@
+--- 
+- name: Check with ps
+  ansible.builtin.shell: ps aux | grep nexus
+  register: app_status
+- ansible.builtin.debug: msg={{ app_status.stdout_lines }}
+
+- name: Wait one minute
+  ansible.builtin.pause:
+    minutes: 1
+
+- name: Check with netstat
+  ansible.builtin.shell: netstat -plnt
+  register: app_status
+- ansible.builtin.debug: msg={{ app_status.stdout_lines }}

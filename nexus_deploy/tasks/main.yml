@@ -1,2 +1,8 @@
 ---
 # tasks file for nexus_deploy
+- ansible.builtin.include_tasks: nexus_user.yaml
+- ansible.builtin.include_tasks: install_java_nettools.yaml
+- ansible.builtin.include_tasks: download_nexus.yaml
+- ansible.builtin.include_tasks: set_nexus_permissions.yaml
+- ansible.builtin.include_tasks: start_nexus.yaml
+- ansible.builtin.include_tasks: verify_nexus_running.yaml.yaml

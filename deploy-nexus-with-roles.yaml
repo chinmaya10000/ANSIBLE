@@ -1,0 +1,5 @@
+--- 
+- name: Deploy Nexus
+  become: yes
+  roles:
+  - {role: nexus_deploy, when: ansible_os_family=="Debian"}

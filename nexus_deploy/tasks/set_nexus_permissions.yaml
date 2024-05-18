@@ -1,0 +1,16 @@
+--- 
+- name: Make nexus user owner of nexus folder 
+  ansible.builtin.file:
+    path: /opt/
+    state: directory
+    recurse: yes
+    owner: nexus
+    group: nexus
+
+- name: Make nexus user owner of sonatype-work folder
+  ansible.builtin.file:
+    path: /opt/sonatype-work
+    state: directory
+    recurse: yes
+    owner: nexus
+    group: nexus

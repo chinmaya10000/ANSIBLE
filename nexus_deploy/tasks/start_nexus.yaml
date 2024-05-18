@@ -1,0 +1,9 @@
+--- 
+- name: set run_as_user nexus 
+  ansible.builtin.lineinfile:
+    path: /opt/nexus/bin/nexus.rc
+    regexp: '^#run_as_user=""'
+    line: run_as_user="nexus"
+
+- name: Start nexus
+  ansible.builtin.command: /opt/nexus/bin/nexus start

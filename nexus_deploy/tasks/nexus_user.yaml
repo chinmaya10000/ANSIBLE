@@ -1,0 +1,9 @@
+--- 
+- name: Create Nexus user 
+  ansible.builtin.group:
+    name: nexus
+    state: present
+- name: Create Nexus user
+  ansible.builtin.user:
+    name: nexus
+    group: nexus

@@ -1,0 +1,65 @@
+--- 
+- name: Install Docker and Docker-Compose
+  hosts: aws_ec2
+  become: yes
+  gather_facts: False
+  tasks:
+  - name: Install Docker
+    ansible.builtin.yum:
+      name: docker
+      update_cache: yes
+      state: present
+  - name: Install Docker-Compose
+    ansible.builtin.get_url:
+      url: https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: +x
+  - name: Check Docker-Compose version 
+    ansible.builtin.command: docker-compose version
+    register: docker_compose_version
+  - ansible.builtin.debug: msg={{ docker_compose_version.stdout_lines }}
+  - name: Start Docker Daemon
+    ansible.builtin.systemd:
+      name: docker
+      state: started
+      enabled: yes
+
+- name: Add user to docker group 
+  hosts: aws_ec2
+  become: yes
+  tasks:
+  - name: Add ec2-user to docker group 
+    ansible.builtin.user:
+      name: ec2-user
+      groups: docker
+      append: yes
+  - name: Reconnect to server session
+    ansible.builtin.meta: reset_connection
+
+#- name: Test docker pull
+  #hosts: docker_server
+  #tasks:
+  #- name: Pull Redis
+    #community.docker.docker_image:
+      #name: redis
+      #source: pull
+
+- name: Start Docker Container 
+  hosts: aws_ec2
+  vars_files:
+  - project-vars
+  tasks:
+  - ansible.builtin.copy:
+      src: /home/ec2-user/ansible/Notes-app/docker-compose.yml
+      dest: /home/ec2-user/docker-compose.yml
+  - name: Docker login 
+    community.docker.docker_login:
+      registry_url: https://index.docker.io/v1/
+      username: chinmayapradhan
+      password: "{{ docker_password }}"
+  - name: Start Container from Compose
+    ansible.builtin.shell:
+      cmd: "docker-compose -f docker-compose.yml up -d"
+      chdir: /home/ec2-user/
+
+ 

@@ -14,3 +14,5 @@
 # pip3 install openshift --user
 # python3 -c "import yaml"
 # pip3 install PyYAML --user
+
+# ansible-inventory -i inventory_aws_ec2.yaml --graph

@@ -1,0 +1,50 @@
+--- 
+- name: Setup bastion host 
+  hosts: localhost 
+  connection: local
+  gather_facts: false
+  tasks: 
+  - name: Import vpc variable file
+    ansible.builtin.include_vars: vars/bastion-vars
+  - name: Import output_put variable file
+    ansible.builtin.include_vars: vars/output_vars
+
+  - name: Create a new ec2 key pair 
+    amazon.aws.ec2_key:
+      name: ssh-server-key
+      region: "{{ region }}"
+    register: ec2_key_result
+  - ansible.builtin.debug: msg="{{ ec2_key_result.key.private_key }}"
+  - name: save private key
+    ansible.builtin.copy:
+      dest: "./server-key.pem"
+      content: "{{ ec2_key_result.key.private_key }}"
+      mode: '0600'
+    when: ec2_key_result.changed
+  
+  - name: Create security group
+    amazon.aws.ec2_security_group:
+      name: ssh-server-sg
+      description: Security group for ssh server
+      vpc_id: "{{ vpc_id }}"
+      region: "{{ region }}"
+      rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: "{{ my_ip }}"
+    register: security_group_result
+  
+  - name: Create ec2 instance
+    amazon.aws.ec2_instance:
+      name: ssh-server
+      key_name: ssh-server-key
+      instance_type: t2.micro
+      image_id: "{{ ami_id }}"
+      region: "{{ region }}"
+      security_group: ssh-server-sg
+      vpc_subnet_id: "{{ pub_sub1_id }}"
+      exact_count: 1
+      tags:
+        Name: ssh-server
+    register: ec2_instance_result

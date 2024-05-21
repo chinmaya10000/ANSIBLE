@@ -114,3 +114,29 @@
           gateway_id: "{{ igw_output.gateway_id }}"
     register: pub_rt_output
   - ansible.builtin.debug: msg="{{ pub_rt_output.route_table.id }}"
+
+  - name: Create new nat gateway and allocate new EIP if a nat gateway does not yet exist in the subnet.
+    amazon.aws.ec2_vpc_nat_gateway:
+      subnet_id: "{{ pub_sub1.subnet.id }}"
+      wait: yes
+      state: "{{ state }}"
+      region: "{{ region }}"
+      if_exist_do_not_create: yes
+    register: nat_output
+  - ansible.builtin.debug: msg="{{ nat_output }}"
+
+  - name: Set up private subnet route table
+    amazon.aws.ec2_vpc_route_table:
+      vpc_id: "{{ vpc_output.vpc.id }}"
+      region: "{{ region }}"
+      tags:
+        Name: PrivRT
+      subnets:
+        - "{{ priv_sub1.subnet.id }}"
+        - "{{ priv_sub2.subnet.id }}"
+        - "{{ priv_sub3.subnet.id }}"
+      routes:
+        - dest: 0.0.0.0/0
+          gateway_id: "{{ nat_output.nat_gateway_id }}"
+    register: priv_rt_output
+  - ansible.builtin.debug: msg="{{ priv_rt_output.route_table.id }}"

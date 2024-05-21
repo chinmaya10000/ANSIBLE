@@ -88,3 +88,13 @@
         Name: PrivSub3
     register: priv_sub3
   - ansible.builtin.debug: msg="{{ priv_sub3.subnet.id }}"
+
+  - name: Create Internet Gateway
+    amazon.aws.ec2_vpc_igw:
+      vpc_id: "{{ vpc_output.vpc.id }}"
+      state: "{{ state }}"
+      region: "{{ region }}"
+      tags:
+        Name: IGW
+    register: igw_output
+  - ansible.builtin.debug: msg="{{ igw_output }}"

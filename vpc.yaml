@@ -123,7 +123,7 @@
       region: "{{ region }}"
       if_exist_do_not_create: yes
     register: nat_output
-  - ansible.builtin.debug: msg="{{ nat_output }}"
+  - ansible.builtin.debug: msg="{{ nat_output.nat_gateway_id }}"
 
   - name: Set up private subnet route table
     amazon.aws.ec2_vpc_route_table:
@@ -140,3 +140,22 @@
           gateway_id: "{{ nat_output.nat_gateway_id }}"
     register: priv_rt_output
   - ansible.builtin.debug: msg="{{ priv_rt_output.route_table.id }}"
+
+  - ansible.builtin.set_fact:
+      vpc_id: "{{ vpc_output.vpc.id }}"
+      pub_sub1_id: "{{ pub_sub1.subnet.id }}"
+      pub_sub2_id: "{{ pub_sub2.subnet.id }}"
+      pub_sub3_id: "{{ pub_sub3.subnet.id }}"
+      priv_sub1_id: "{{ priv_sub1.subnet.id }}"
+      priv_sub2_id: "{{ priv_sub2.subnet.id }}"
+      priv_sub3_id: "{{ priv_sub3.subnet.id }}"
+      pub_rt_id: "{{ pub_rt_output.route_table.id }}"
+      priv_rt_id: "{{ priv_rt_output.route_table.id }}"
+      igw_id: "{{ igw_output.gateway_id }}"
+      nat_gw_id: "{{ nat_output.nat_gateway_id }}"
+      cacheable: yes
+
+  - name: Create variables file
+    ansible.builtin.copy:
+      content: "vpc_id: {{ vpc_output.vpc.id }}\npub_sub1_id: {{ pub_sub1.subnet.id }}\npub_sub2_id: {{ pub_sub2.subnet.id }}\npub_sub3_id: {{ pub_sub3.subnet.id }}\npriv_sub1_id: {{ priv_sub1.subnet.id }}\npriv_sub2_id: {{ priv_sub2.subnet.id }}\npriv_sub3_id: {{ priv_sub3.subnet.id }}\npub_rt_id: {{ pub_rt_output.route_table.id }}\npriv_rt_id: {{ priv_rt_output.route_table.id }}\nigw_id: {{ igw_output.gateway_id }}\nnat_gw_id: {{ nat_output.nat_gateway_id }}\n"
+      dest: vars/output_vars

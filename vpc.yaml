@@ -41,7 +41,7 @@
       tags:
         Name: PubSub2
     register: pub_sub2
-  - ansible.builtin.debug: msg="{{ pub_sub2.subnet.id }}"
+  - ansible.builtin.debug: msg="{{ pub_sub2 }}"
   - name: Create Public Subnet 3 in zone3
     amazon.aws.ec2_vpc_subnet:
       state: "{{ state }}"
@@ -53,4 +53,4 @@
       tags:
         Name: PubSub3
     register: pub_sub3
-  - ansible.builtin.debug: msg="{{ pub_sub3.subnet.id }}"
+  - ansible.builtin.debug: msg="{{ pub_sub3 }}"

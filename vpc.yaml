@@ -16,4 +16,4 @@
       tenancy: default
       state: "{{ state }}"
     register: vpc_output
-  - ansible.builtin.debug: msg="{{ vpc_output }}"
+  - ansible.builtin.debug: msg="{{ vpc_output.vpc.id }}"

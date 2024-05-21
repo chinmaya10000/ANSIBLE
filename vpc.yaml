@@ -29,4 +29,4 @@
       tags:
         Name: PubSub1
     register: pub_sub1
-  - ansible.builtin.debug: msg="{{ pub_sub1 }}"
+  - ansible.builtin.debug: msg="{{ pub_sub1.subnet.id }}"

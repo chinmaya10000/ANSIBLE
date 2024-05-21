@@ -17,3 +17,16 @@
       state: "{{ state }}"
     register: vpc_output
   - ansible.builtin.debug: msg="{{ vpc_output.vpc.id }}"
+
+  - name: Create Public Subnet 1 in zone1
+    amazon.aws.ec2_vpc_subnet:
+      state: "{{ state }}"
+      vpc_id: "{{ vpc_output.vpc.id }}"
+      region: "{{ region }}"
+      cidr: "{{ PubSub1Cidr }}"
+      az: "{{ zone1 }}"
+      map_public: yes
+      tags:
+        Name: PubSub1
+    register: pub_sub1
+  - ansible.builtin.debug: msg="{{ pub_sub1 }}"

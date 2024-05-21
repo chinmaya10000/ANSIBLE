@@ -97,4 +97,6 @@
       tags:
         Name: IGW
     register: igw_output
-  - ansible.builtin.debug: msg="{{ igw_output }}"
+  - ansible.builtin.debug: msg="{{ igw_output.gateway_id }}"
+
+ 

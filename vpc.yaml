@@ -54,3 +54,36 @@
         Name: PubSub3
     register: pub_sub3
   - ansible.builtin.debug: msg="{{ pub_sub3.subnet.id }}"
+
+  - name: Create Private Subnet 1 in zone1
+    amazon.aws.ec2_vpc_subnet:
+      state: "{{ state }}"
+      vpc_id: "{{ vpc_output.vpc.id }}"
+      region: "{{ region }}"
+      cidr: "{{ PrivSub1Cidr }}"
+      az: "{{ zone1 }}"
+      tags:
+        Name: PrivSub1
+    register: priv_sub1
+  - ansible.builtin.debug: msg="{{ priv_sub1.subnet.id }}"
+  - name: Create Private Subnet 2 in zone2
+    amazon.aws.ec2_vpc_subnet:
+      state: "{{ state }}"
+      vpc_id: "{{ vpc_output.vpc.id }}"
+      region: "{{ region }}"
+      cidr: "{{ PrivSub2Cidr }}"
+      az: "{{ zone2 }}"
+      tags:
+        Name: PrivSub2
+    register: priv_sub2
+  - ansible.builtin.debug: msg="{{ priv_sub2.subnet.id }}"
+  - name: Create Private Subnet 3 in zone3
+    amazon.aws.ec2_vpc_subnet:
+      state: "{{ state }}"
+      vpc_id: "{{ vpc_output.vpc.id }}"
+      region: "{{ region }}"
+      cidr: "{{ PrivSub3Cidr }}"
+      az: "{{ zone3 }}"
+      tags:
+        Name: PrivSub3
+    register: priv_sub3

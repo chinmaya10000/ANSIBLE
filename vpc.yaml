@@ -71,7 +71,7 @@
       state: "{{ state }}"
       vpc_id: "{{ vpc_output.vpc.id }}"
       region: "{{ region }}"
-      cidr: "{{ PrivSub2Cidr: }}"
+      cidr: "{{ PrivSub2Cidr }}"
       az: "{{ zone2 }}"
       tags:
         Name: PrivSub2

@@ -99,4 +99,18 @@
     register: igw_output
   - ansible.builtin.debug: msg="{{ igw_output.gateway_id }}"
 
- 
+  - name: Set up public subnet route table
+    amazon.aws.ec2_vpc_route_table: 
+      vpc_id: "{{ vpc_output.vpc.id }}"
+      region: "{{ region }}"
+      tags:
+        Name: PubRT
+      subnets:
+        - "{{ pub_sub1.subnet.id }}"
+        - "{{ pub_sub2.subnet.id }}"
+        - "{{ pub_sub3.subnet.id }}"
+      routes:
+        - dest: 0.0.0.0/0
+          gateway_id: "{{ igw_output.gateway_id }}"
+    register: pub_rt_output
+  - ansible.builtin.debug: msg="{{ pub_rt_output }}"
